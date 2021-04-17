@@ -1,0 +1,7 @@
+{
+  "name": "ses-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

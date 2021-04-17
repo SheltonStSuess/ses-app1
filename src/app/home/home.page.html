@@ -1,0 +1,73 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>SES Project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list lines="full">
+    <form [formGroup]="mainForm" (ngSubmit)="storeData()">
+      <ion-item>
+        <ion-label position="floating">First name</ion-label>
+        <ion-input formControlName="fname" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Last name</ion-label>
+        <ion-input formControlName="lname" type="text" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Gender</ion-label>
+        <ion-input formControlName="sex" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Date of Birth</ion-label>
+        <ion-input formControlName="dob" type="text" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">
+            Add Person
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+    <ion-list>
+    <ion-list-header>
+        <h3>Folks List</h3>
+    </ion-list-header>
+      <ion-searchbar placeholder="filter..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+
+    <ion-item lines="inset" *ngFor="let data of Data | filter:filterTerm">
+      <ion-label>
+        <h5>{{data.fname}} {{data.lname}}</h5>
+        <p>Gender: {{data.sex}} DOB: {{data.dob}} age: {{data.age}}</p>
+      </ion-label>
+
+      <div class="item-note" item-end>
+        <ion-icon name="create" style="zoom:2.0" [routerLink]="['/folks', data.id]"></ion-icon>
+        <ion-icon name="trash" style="zoom:2.0" (click)="deletePerson(data.id)"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+
+<ion-button expand="block" (click)="calcStats()">Calculate Age Stats</ion-button>
+  <ion-item>
+    <ion-label>Average Age {{avg}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Max Age {{max}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Min Age {{min}}</ion-label>
+  </ion-item>
+</ion-content>
